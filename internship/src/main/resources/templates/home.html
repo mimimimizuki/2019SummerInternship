@@ -16,7 +16,9 @@
         <th bgcolor="#EE0000" width="200"><font color="#FFFFFF">Description</font></th>
         </tr>
         <tr th:each="todo:${todos}">
-          <!-- TODO データを出力するためのコードを作成してください。 -->
+        <th th:text="${todos.id}" ></th>
+        <th th:text="${todos.title}" ></th>
+        <th th:text="${todos.description}" ></th>
         </tr>
     </table>
     <br>

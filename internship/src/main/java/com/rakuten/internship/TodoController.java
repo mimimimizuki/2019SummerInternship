@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * このクラスは、ウェブアプリケーションの挙動を制御するためのコントローラークラスです。。
@@ -16,19 +17,28 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class TodoController {
+    
+    @Autowired
 
+    TodoRepository todoRepository;
+
+    
     // TODO 必要なメンバーを宣言してください。
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String home(Model model) {
-        // TODO 必要なコードを作成してください。
-        return null;
+        List todos = (List) userRepository.findAll();
+		model.addAttribute("todos", todos);
+        return "home";
     }
 
     @GetMapping("/create")
-    public String create() {
-        // TODO 必要なコードを作成してください。
-        return null;
+    public String create(@RequestParam String title, @RequestParam String description) {
+        Todo todo = new Todo();
+        todo.setTitle(title);
+        todo.setDescription(description);
+        todoRepository.save(todo);
+        return "complete";
     }
 
     @PostMapping("/create")
