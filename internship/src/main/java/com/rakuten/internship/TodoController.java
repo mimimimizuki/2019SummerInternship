@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 /**
  * このクラスは、ウェブアプリケーションの挙動を制御するためのコントローラークラスです。。
  * コントローラーとして使えるように、コードを記入してください。
@@ -23,7 +24,6 @@ public class TodoController {
 
     private TodoService todoservice;
 
-    
     @GetMapping
     public String home(Model model) {
         List<Todo> todos = todoservice.findAll();
@@ -31,14 +31,19 @@ public class TodoController {
         return "home";
     }
 
-    @GetMapping("/create")
+    @GetMapping("create")
     public String create(Model model) {
         return "create";
     }
 
-    @PostMapping
-    public String complete(@ModelAttribute Todo todo) {
-       todoservice.save(todo);
-       return "complete";
+    @PostMapping("create")
+    public String createTodo(@Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "error";
+        }
+        else{
+            todoservice.save(todo);
+            return "complete";
+        }
     }
 }

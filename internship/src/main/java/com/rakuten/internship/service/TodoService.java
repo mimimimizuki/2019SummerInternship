@@ -20,10 +20,10 @@ public class TodoService {
     public List<Todo> findAll(){
         return todoRepository.findAll();
     }
-
-    public Todo findOne(Long id){
-        return todoRepository.findOne(id);
-        }
+    
+//    public Todo findOne(Long id){
+//        return todoRepository.findOne(id);
+//    }
 
     public Todo save(Todo todo) {
         return todoRepository.save(todo);
