@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.rakuten.internship.entity.Todo;
+import com.rakuten.internship.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,15 +16,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class TodoService {
 @Autowired
     TodoRepository todoRepository;
-    // TODO 必要なメンバーを宣言してください。
-
-    public List<Todo> findTodos(Integer id){
-        Todo todo = todoRepository.findOne(id);
-        return todo;
+    
+    public List<Todo> findAll(){
+        return todoRepository.findAll();
     }
 
+    public Todo findOne(Long id){
+        return todoRepository.findOne(id);
+        }
+
     public Todo save(Todo todo) {
-        // TODO 必要なコードを作成してください。
-        return null;
+        return todoRepository.save(todo);
     }
 }
