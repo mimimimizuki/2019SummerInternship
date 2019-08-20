@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 /**
@@ -18,32 +19,33 @@ import org.springframework.validation.BindingResult;
  * コントローラーとして使えるように、コードを記入してください。
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 public class TodoController {
     @Autowired
 
     private TodoService todoservice;
+    
 
-    @GetMapping
+    @GetMapping("/")
     public String home(Model model) {
         List<Todo> todos = todoservice.findAll();
 		model.addAttribute("todos", todos);
         return "home";
     }
 
-    @GetMapping("create")
-    public String create(Model model) {
+    @GetMapping("/create")
+    public String create() {
         return "create";
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public String createTodo(@Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return "error";
         }
         else{
             todoservice.save(todo);
-            return "complete";
+            return "redirect:home";
         }
     }
 }
