@@ -16,16 +16,21 @@ public class TodoService {
 @Autowired
     TodoRepository todoRepository;
     
-    public List<Todo> findAll(){
+    public List<Todo> findTodos(){
         return todoRepository.findAll();
     }
     
 //    public Todo findById(Long id){
 //        return  todoRepository.findById(id);
 //    }
-
     public Todo save(Todo todo) {
         return todoRepository.save(todo);
+    }
+    
+    public void delete(Long id) {
+        Todo todo = new Todo();
+		todo.setId(id);
+		todoRepository.delete(todo);
     }
     
 }

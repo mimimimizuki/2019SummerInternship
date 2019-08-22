@@ -1,7 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <title>Summer Short Internship 2019</title>
   <script type="text/javascript">
-    document.getElementById("btn").click();   
+  function frameClick() {
+      document.location.href = "/home";
+    }
   </script>
   <body>
     	<h1>
@@ -11,6 +13,6 @@
       Success to register a todo task!
 
       <br><br>
-    <button id="btn" value="Back" href="/home.html">Back</button>
+    <button id="btn" value="Back" onclick="frameClick();">Back</button>
   </body>
 </html>

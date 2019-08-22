@@ -8,18 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import javax.validation.Valid;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 /**
  * このクラスは、ウェブアプリケーションの挙動を制御するためのコントローラークラスです。。
  * コントローラーとして使えるように、コードを記入してください。
  */
 @Controller
-@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping("/")
 public class TodoController {
     @Autowired
 
@@ -28,7 +27,7 @@ public class TodoController {
 
     @GetMapping("/")
     public String home(Model model) {
-        List<Todo> todos = todoservice.findAll();
+        List<Todo> todos = todoservice.findTodos();
 		model.addAttribute("todos", todos);
         return "home";
     }
@@ -39,13 +38,13 @@ public class TodoController {
     }
 
     @PostMapping("/create")
-    public String createTodo(@Valid @ModelAttribute Todo todo, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            return "error";
-        }
-        else{
+    public String createTodo(@ModelAttribute Todo todo) {
             todoservice.save(todo);
-            return "redirect:home";
-        }
+            return "complete";
     }
+//    @RequestMapping(value = {"home/{id}"}, method = {RequestMethod.GET})
+//    public String delete(@PathVariable("id") String id) {
+//            todoservice.delete(Long.parseLong(id));
+//            return "redirect:home";
+//    }
 }
