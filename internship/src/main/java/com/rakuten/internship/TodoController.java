@@ -42,9 +42,9 @@ public class TodoController {
             todoservice.save(todo);
             return "complete";
     }
-//    @RequestMapping(value = {"home/{id}"}, method = {RequestMethod.GET})
-//    public String delete(@PathVariable("id") String id) {
-//            todoservice.delete(Long.parseLong(id));
-//            return "redirect:home";
+//    @RequestMapping(value = {"home/{id}"}, method = RequestMethod.GET)
+//    public String delete(@PathVariable Long id) {
+//            todoservice.delete());
+//            return "redirect:/home";
 //    }
 }
