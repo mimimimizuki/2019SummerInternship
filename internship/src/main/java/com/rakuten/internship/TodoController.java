@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 /**
  * このクラスは、ウェブアプリケーションの挙動を制御するためのコントローラークラスです。。
  * コントローラーとして使えるように、コードを記入してください。
@@ -42,9 +42,12 @@ public class TodoController {
             todoservice.save(todo);
             return "complete";
     }
-//    @RequestMapping(value = {"home/{id}"}, method = RequestMethod.GET)
-//    public String delete(@PathVariable Long id) {
-//            todoservice.delete());
-//            return "redirect:/home";
-//    }
+    @GetMapping({"home/{delete}"})
+    public String delete(@RequestParam(name = "delete") Long id) {
+            if(id >= 1){
+            todoservice.delete(id);
+        }
+
+            return "redirect:/home";
+    }
 }
