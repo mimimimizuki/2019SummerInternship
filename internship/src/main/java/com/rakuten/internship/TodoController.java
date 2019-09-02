@@ -42,12 +42,12 @@ public class TodoController {
             todoservice.save(todo);
             return "complete";
     }
-    @GetMapping({"home/{delete}"})
+    @GetMapping({"/delete"})
     public String delete(@RequestParam(name = "delete") Long id) {
             if(id >= 1){
             todoservice.delete(id);
         }
 
-            return "redirect:/home";
+            return "redirect:/";
     }
 }

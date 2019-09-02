@@ -7,10 +7,6 @@
   function frameClick() {
       document.location.href = "/create";
     }
-  function deleteClick() {
-      document.location.href = "/";
-  }
-
   </script>
   </head>
   <body>
@@ -38,7 +34,9 @@
     <button id="btn" value="Click" onclick="frameClick();">add Todo List!</button>
     </div>
     <br>
+    <form action="/delete">
     <input name = "delete"  placeholder = "Which number did you do?" >
-    <button id="button" value = "Click" onClick="deleteClick();"> Done! </button>
+    <button id="button" value = "Click"> Delete! </button>
+    </form>
   </body>
 </html>
